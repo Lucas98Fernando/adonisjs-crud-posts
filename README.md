@@ -1,5 +1,9 @@
 # CRUD de posts com Adonis.js  e PostgreSQL :rocket:
 
+Funcionalidades da API: 
+- Cadastro e login de usuários
+- Criação, edição e exclusão de posts apenas para usuários autenticados com token
+
 ## Lista de comandos importantes:point_down:
 
 ### :arrow_forward: Instalar o lucid
@@ -49,3 +53,8 @@ node ace make:controller <nomedocontroller> -r
 ```
 npm run dev
 ```
+
+### :arrow_forward: Ver listas de rotas da aplicação
+
+```
+node ace list:routes
