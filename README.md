@@ -10,7 +10,7 @@ npm i @adonisjs/lucid
 
 ### :arrow_forward: Configurar qual banco de dados utilizar
 
-- Quando o comando abaixo for utilizado, você poderá selecionar qual banco irá utilizar, como por exemplo: **MySQL**, **PostgresSQL**, **MsSQL Driver**, **OracleDB**, **SQLite**, etc...
+- Quando o comando abaixo for utilizado, você poderá selecionar qual banco irá utilizar, como por exemplo: **MySQL**, **PostgreSQL**, **MsSQL Driver**, **OracleDB**, **SQLite**, etc...
 
 - :warning: **Observação:** Não esquecer de definir os tipos das variáveis de ambiente no arquivo **env.ts**
 
