@@ -1,4 +1,4 @@
-# CRUD de posts com Adonis.js  e PostgresSQL :rocket:
+# CRUD de posts com Adonis.js  e PostgreSQL :rocket:
 
 ## Lista de comandos importantes:point_down:
 
