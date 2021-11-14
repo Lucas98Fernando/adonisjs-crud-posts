@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
 import { column, beforeSave, BaseModel, hasMany, HasMany } from '@ioc:Adonis/Lucid/Orm'
-import Post from './Post'
+import Product from './Product'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -32,6 +32,6 @@ export default class User extends BaseModel {
     }
   }
 
-  @hasMany(() => Post)
-  public posts: HasMany<typeof Post>
+  @hasMany(() => Product)
+  public product: HasMany<typeof Product>
 }

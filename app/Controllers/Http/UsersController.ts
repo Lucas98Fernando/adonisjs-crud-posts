@@ -6,7 +6,7 @@ export default class UsersController {
     try {
       const data = request.only(['name', 'email', 'password'])
       const user = await User.create(data)
-      return user
+      return response.status(201).send(user)
     } catch {
       response.badRequest({
         message: 'Não foi possível realizar o cadastro',

@@ -1,8 +1,9 @@
-# CRUD de posts com Adonis.js  e PostgreSQL :rocket:
+# Checklist de produtos da feira do supermercado
 
 Funcionalidades da API: 
 - Cadastro e login de usuários
-- Criação, edição e exclusão de posts apenas para usuários autenticados com token
+- Criação, edição e exclusão de produtos apenas para usuários autenticados com token
+- Vinculação de produtos criados ao usuário que criou
 
 ## Lista de comandos importantes:point_down:
 
