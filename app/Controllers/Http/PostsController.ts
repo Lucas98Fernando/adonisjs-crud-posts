@@ -9,9 +9,10 @@ export default class PostsController {
   }
 
   // Criação
-  public async store({ request }: HttpContextContract) {
+  public async store({ auth, request }: HttpContextContract) {
+    const id = auth.use('api').user?.id
     const data = request.only(['title', 'description'])
-    const newPost = await Post.create(data)
+    const newPost = await Post.create({ user_id: id, ...data })
     return newPost
   }
 
