@@ -34,7 +34,7 @@ export default class UsersController {
   public async validateToken({ auth, response }: HttpContextContract) {
     try {
       await auth.use('api').authenticate()
-      auth.use('api').isLoggedIn
+      auth.use('api').isAuthenticated
     } catch {
       return response.badRequest({ message: 'O usuário não está autenticado!' })
     }
