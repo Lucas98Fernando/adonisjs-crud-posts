@@ -1,6 +1,7 @@
 # Checklist de produtos da feira do supermercado
 
-Funcionalidades da API: 
+Funcionalidades da API:
+
 - Cadastro e login de usuários
 - Criação, edição e exclusão de produtos apenas para usuários autenticados com token
 - Vinculação de produtos criados ao usuário que criou
@@ -29,7 +30,7 @@ node ace configure @adonisjs/lucid
 node ace make:migration <nomedamigracao>
 ```
 
-- Quando o comando acima for executado no  terminal, será criado um arquivo de migração como o nome informado no diretório: <code>database/migrations</code>
+- Quando o comando acima for executado no terminal, será criado um arquivo de migração como o nome informado no diretório: <code>database/migrations</code>
 
 ### :arrow_forward: Executar migração para conectar com o banco de dados configurado
 
@@ -59,3 +60,4 @@ npm run dev
 
 ```
 node ace list:routes
+```

@@ -14,9 +14,7 @@ export default class UsersController {
         return response.status(201).send(user)
       }
     } catch {
-      response.badRequest({
-        message: 'Não foi possível realizar o cadastro',
-      })
+      response.badRequest({ message: 'Não foi possível realizar o cadastro' })
     }
   }
 
@@ -30,6 +28,15 @@ export default class UsersController {
       return token
     } catch {
       return response.badRequest({ message: 'Credenciais inválidas!' })
+    }
+  }
+
+  public async validateToken({ auth, response }: HttpContextContract) {
+    try {
+      await auth.use('api').authenticate()
+      auth.use('api').isLoggedIn
+    } catch {
+      return response.badRequest({ message: 'O usuário não está autenticado!' })
     }
   }
 }
