@@ -5,8 +5,14 @@ export default class UsersController {
   public async register({ request, response }: HttpContextContract) {
     try {
       const data = request.only(['name', 'email', 'password'])
-      const user = await User.create(data)
-      return response.status(201).send(user)
+      if (!data.name || !data.email || !data.password) {
+        return response.badRequest({
+          message: 'Existem campos inválidos!',
+        })
+      } else {
+        const user = await User.create(data)
+        return response.status(201).send(user)
+      }
     } catch {
       response.badRequest({
         message: 'Não foi possível realizar o cadastro',
