@@ -25,7 +25,7 @@ export default class UsersController {
       const token = await auth.use('api').attempt(email, password, {
         expiresIn: '30mins',
       })
-      return token
+      return { token: token.token, name: auth.user?.name, email: auth.user?.email }
     } catch {
       return response.badRequest({ message: 'Credenciais inválidas!' })
     }
