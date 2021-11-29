@@ -11,8 +11,18 @@ export default class ProductsController {
   public async store({ auth, request, response }: HttpContextContract) {
     const id = auth.user?.id
     const data = request.only(['name', 'price', 'qtd'])
-    const newProduct = await Product.create({ user_id: id, ...data, status: 0 })
-    return response.status(201).send(newProduct)
+    const duplicateProduct = await Product.query()
+      .select('*')
+      .where('user_id', `${id}`)
+      .where('name', data.name)
+    if (duplicateProduct.length > 0) {
+      return response
+        .status(400)
+        .send({ message: 'Já existe um produto cadastrado com o mesmo nome' })
+    } else {
+      const newProduct = await Product.create({ user_id: id, ...data, status: 0 })
+      return response.status(201).send(newProduct)
+    }
   }
 
   public async show({ params }: HttpContextContract) {
@@ -20,12 +30,25 @@ export default class ProductsController {
     return product
   }
 
-  public async update({ params, request }: HttpContextContract) {
+  public async update({ auth, params, request, response }: HttpContextContract) {
+    const id = auth.user?.id
     const product = await Product.findOrFail(params.id)
     const newData = request.only(['name', 'price', 'qtd', 'status'])
-    product.merge(newData)
-    await product.save()
-    return product
+    if (request.method() === 'PUT') {
+      const duplicateProduct = await Product.query()
+        .select('*')
+        .where('user_id', `${id}`)
+        .where('name', newData.name)
+      if (duplicateProduct.length > 0) {
+        return response
+          .status(400)
+          .send({ message: 'Já existe um produto cadastrado com o mesmo nome' })
+      }
+    } else {
+      product.merge(newData)
+      await product.save()
+      return product
+    }
   }
 
   public async destroy({ params }: HttpContextContract) {

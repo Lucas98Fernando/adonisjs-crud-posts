@@ -26,8 +26,15 @@ export default class UsersController {
         expiresIn: '30mins',
       })
       return { token: token.token, name: auth.user?.name, email: auth.user?.email }
-    } catch {
-      return response.badRequest({ message: 'Não foi possível fazer login' })
+    } catch (error) {
+      if (
+        error.responseText === 'E_INVALID_AUTH_PASSWORD: Password mis-match' ||
+        error.responseText === 'E_INVALID_AUTH_UID: User not found'
+      ) {
+        return response.status(401).send({ message: 'E-mail ou senha incorretos!' })
+      } else {
+        return response.badRequest({ message: 'Não foi possível fazer login' })
+      }
     }
   }
 
