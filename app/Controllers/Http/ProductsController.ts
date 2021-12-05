@@ -30,21 +30,14 @@ export default class ProductsController {
     return product
   }
 
-  public async update({ auth, params, request, response }: HttpContextContract) {
-    const id = auth.user?.id
+  public async update({ params, request, response }: HttpContextContract) {
     const product = await Product.findOrFail(params.id)
     const newData = request.only(['name', 'price', 'qtd', 'status'])
-    if (request.method() === 'PUT') {
-      const duplicateProduct = await Product.query()
-        .select('*')
-        .where('user_id', `${id}`)
-        .where('name', newData.name)
-      if (duplicateProduct.length > 0) {
-        return response
-          .status(400)
-          .send({ message: 'Já existe um produto cadastrado com o mesmo nome' })
-      }
-    } else {
+    if (typeof newData.price !== 'number')
+      response.status(400).send({ message: 'Só é permitido valores númericos para preço.' })
+    else if (typeof newData.qtd !== 'number')
+      response.status(400).send({ message: 'Só é permitido valores númericos para quantidade.' })
+    else {
       product.merge(newData)
       await product.save()
       return product
